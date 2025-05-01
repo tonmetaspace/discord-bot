@@ -1,23 +1,23 @@
 // Variables in .env and .env.defaults will be added to process.env
-const dotenv = require("dotenv");
-dotenv.config({ path: ".env" });
-dotenv.config({ path: ".env.defaults" });
+import { config as dotenv_config } from 'dotenv';
+dotenv_config({ path: ".env" });
+dotenv_config({ path: ".env.defaults" });
 
 if (process.env.SENTRY_DSN) {
-  const Sentry = require("@sentry/node");
+  const Sentry = import("@sentry/node");
   Sentry.init({ dsn: process.env.SENTRY_DSN });
 }
 
-const moment = require('moment-timezone');
-const discord = require('discord.js');
-const schedule = require('node-schedule');
-const { Bridges, HubState } = require("./bridges.js");
-const { ReticulumClient } = require("./reticulum.js");
-const { TopicManager } = require("./topic.js");
-const { NotificationManager } = require("./notifications.js");
-const { HubStats } = require("./hub-stats.js");
-const { PresenceRollups } = require("./presence-rollups.js");
-const { StatsdClient } = require("./statsd-client.js");
+import moment from 'moment-timezone';
+import discord from 'discord.js';
+import schedule from 'node-schedule';
+import { Bridges, HubState } from "./bridges.js";
+import { ReticulumClient } from "./reticulum.js";
+import { TopicManager } from "./topic.js";
+import { NotificationManager } from "./notifications.js";
+import { HubStats } from "./hub-stats.js";
+import { PresenceRollups } from "./presence-rollups.js";
+import { StatsdClient } from "./statsd-client.js";
 
 // someday we will probably have different locales and timezones per server
 moment.tz.setDefault(process.env.TIMEZONE);
@@ -36,12 +36,6 @@ const MEDIA_DEDUPLICATE_MS = 60 * 60 * 1000; // 1 hour
 const IMAGE_URL_RE = /\.(png)|(gif)|(jpg)|(jpeg)$/;
 const ACTIVE_ICON = "🔸";
 const ACTIVE_WEBHOOKS = {}; // { discordChId: webhook }
-const DISABLED_EVENTS = [ // only bother to disable processing on relatively high-volume events
-  "TYPING_START",
-  "MESSAGE_REACTION_ADD",
-  "MESSAGE_REACTION_REMOVE",
-  "PRESENCE_UPDATE"
-];
 
 // base64ified so we don't have to sit around wondering where habitat drops files on the filesystem
 const DUCK_AVATAR = "data:image/png;base64,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";
@@ -219,7 +213,11 @@ async function tryGetOrCreateWebhook(discordCh) {
     if (existingHook != null) {
       return existingHook;
     } else {
-      const newHook = await discordCh.createWebhook(process.env.HUBS_HOOK, DUCK_AVATAR, "Bridging chat between Hubs and Discord.");
+      const newHook = await discordCh.createWebhook({
+        channel: discordCh.id,
+        name: process.env.HUBS_HOOK,
+        avatar: DUCK_AVATAR,
+        reason: "Bridging chat between Hubs and Discord."});
       discordCh.send(`Created a new webhook (${newHook.id}) to use for Hubs chat bridging.`);
       return newHook;
     }
@@ -386,12 +384,12 @@ async function establishBridging(hubState, bridges) {
           console.debug(msg, body);
         }
         if (type === "chat") {
-          webhook.send(body, { username: whom });
+          webhook.send({ content: body, username: whom });
         } else if (type === "media") {
-          webhook.send(body.src, { username: whom });
+          webhook.send({ content: body.src, username: whom });
         } else if (type === "photo" || type == "video") {
           // we like to just broadcast all camera photos and videos, without waiting for anyone to pin them
-          webhook.send(body.src, { username: whom });
+          webhook.send({ content: body.src, username: whom });
         }
       }
     } catch (e) {
@@ -513,18 +511,28 @@ function getBridgeStats(bridges) {
 
 async function start() {
 
-  const shardId = parseInt(process.env.SHARD_ID, 10);
-  const shardCount = parseInt(process.env.SHARD_COUNT, 10);
+  //const shardId = parseInt(process.env.SHARD_ID, 10);
+  //const shardCount = parseInt(process.env.SHARD_COUNT, 10);
+  // Note: sharding has changed since this was implemented and now requires the use of a sharding manager.  Eventually we should update this to work with sharding again, but for now the bot isn't being used enough to warrant it.  The sharding code has been commented out and left here as a reference/TODO.
+
   const discordClient = new discord.Client({
-    shardId,
-    shardCount,
-    messageCacheMaxSize: 1, // we have no use for manipulating historical messages
-    disabledEvents: DISABLED_EVENTS,
-    disableEveryone: true
+    //shardId,
+    //shardCount,
+    makeCache: discord.Options.cacheWithLimits({
+		MessageManager: 1,
+		PresenceManager: 0
+	}), // we have no use for manipulating historical messages
+    allowedMentions: { parse: [] },
+    intents: [
+		discord.GatewayIntentBits.Guilds,
+		discord.GatewayIntentBits.GuildMessages,
+		discord.GatewayIntentBits.MessageContent,
+		discord.GatewayIntentBits.GuildWebhooks,
+	]
   });
 
   await connectToDiscord(discordClient, process.env.TOKEN);
-  console.info(ts(`Connected to Discord (shard ID: ${shardId}/${shardCount})...`));
+  //console.info(ts(`Connected to Discord (shard ID: ${shardId}/${shardCount})...`));
 
   const reticulumHost = process.env.RETICULUM_HOST;
   const reticulumClient = new ReticulumClient(reticulumHost, logger);
@@ -541,7 +549,7 @@ async function start() {
   // one-time scan through all channels to look for existing bridges
   console.info(ts(`Scanning channel topics for Hubs hosts: ${HOSTNAMES.join(", ")}`));
   {
-    const textChannels = discordClient.channels.cache.array().filter(ch => ch.type === "text");
+    const textChannels = [...discordClient.channels.cache.values()].filter(ch => ch.type === discord.ChannelType.GuildText);
     const candidateBridges = findBridges(topicManager, textChannels);
 
     for (const [key, channels] of candidateBridges.entries()) {
@@ -567,10 +575,9 @@ async function start() {
         // and it sucks to have to do it on literally every random channel in a server that the bot can read
         const perms = discordCh.permissionsFor(discordClient.user);
         if (perms.has([
-          discord.Permissions.FLAGS.MANAGE_MESSAGES,
-          discord.Permissions.FLAGS.VIEW_CHANNEL,
-          discord.Permissions.FLAGS.READ_MESSAGES,
-          discord.Permissions.FLAGS.READ_MESSAGE_HISTORY
+          discord.PermissionsBitField.Flags.ManageMessages,
+          discord.PermissionsBitField.Flags.ViewChannel,
+          discord.PermissionsBitField.Flags.ReadMessageHistory
         ])) {
           const pins = await discordCh.messages.fetchPinned();
           const notifications = pins.filter(msg => {
@@ -599,7 +606,7 @@ async function start() {
     const hubState = bridges.getHub(msg.channel.id);
     const description = hubState != null ? `the Hubs room: ${hubState.shortUrl}` : "a Hubs room.";
     try {
-      await msg.channel.send(`@here Hey! You should join ${description}`, { disableEveryone: false });
+      await msg.channel.send({ content: `@here Hey! You should join ${description}`, allowedMentions: { parse: ['everyone'] } });
       await msg.unpin();
     } catch(e) {
       console.error(ts(`Error sending notification in channel ${formatDiscordCh(msg.channel)}:`), e);
@@ -629,7 +636,7 @@ async function start() {
     }
   });
 
-  discordClient.on('webhookUpdate', (discordCh) => {
+  discordClient.on('webhooksUpdate', (discordCh) => {
     q.enqueue(async () => {
       const hubState = bridges.getHub(discordCh.id);
       if (hubState != null) {
@@ -715,7 +722,7 @@ async function start() {
         "of bot functionality, including guidelines on what permissions the bot needs, what kinds of bridging the bot can do, " +
         "and more about how the bot bridges channels to rooms. You can invite the bot to your own server at https://your-server.com/discord.";
 
-  discordClient.on('message', msg => {
+  discordClient.on('messageCreate', msg => {
     const args = msg.content.split(' ');
     const discordCh = msg.channel;
 
@@ -731,7 +738,7 @@ async function start() {
       if (msg.author.id === discordClient.user.id) {
         return;
       }
-      if (activeWebhook != null && msg.webhookID === activeWebhook.id) {
+      if (activeWebhook != null && msg.webhookId === activeWebhook.id) {
         return;
       }
 

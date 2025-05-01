@@ -1,7 +1,7 @@
-var dgram = require("dgram");
+import dgram from 'dgram';
 
 // Client for talking to a statsd server over UDP (https://github.com/statsd/statsd).
-class StatsdClient {
+export class StatsdClient {
 
   constructor(hostname, port, prefix) {
     this.hostname = hostname;
@@ -29,5 +29,3 @@ class StatsdClient {
   }
 
 }
-
-module.exports = { StatsdClient };

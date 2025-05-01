@@ -92,7 +92,7 @@ To simply run the bot process:
 
 1. Clone this repository.
 
-2. Install Node and `npm`. The instructions [at the NPM website][npm] should suffice.
+2. Install Node v22.14.0 and `npm`. The instructions [at the NPM website][npm] should suffice.
 
 3. Install Javascript dependencies by running `npm ci`.
 

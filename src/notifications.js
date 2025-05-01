@@ -1,10 +1,10 @@
-const EventEmitter = require('events');
-const moment = require('moment-timezone');
-const schedule = require('node-schedule');
+import EventEmitter from 'node:events';
+import moment from 'moment-timezone';
+import schedule from 'node-schedule';
 
 // Maintains a list of scheduled notifications associated with individual Discord channels,
 // runs a job to keep an eye on them, and fires an event when a notification should be activated.
-class NotificationManager extends EventEmitter {
+export class NotificationManager extends EventEmitter {
   constructor() {
     super();
     this.data = new Map(); // { moment: Set(notificationMessages) }
@@ -58,5 +58,3 @@ class NotificationManager extends EventEmitter {
     });
   }
 }
-
-module.exports = { NotificationManager };

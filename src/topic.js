@@ -1,5 +1,5 @@
-const escapeStringRegexp = require('escape-string-regexp');
-const URL = require('url').URL;
+import escapeStringRegexp from 'escape-string-regexp';
+import { URL } from 'url';
 
 const HUB_ID_RE = new RegExp("^\\w{7}$");
 const SCENE_ID_RE = new RegExp("^\\w{7}$");
@@ -18,7 +18,7 @@ function splitPath(path) {
 // Tools to manage the channel topic without murdering things that humans have written in it themselves.
 // Gently tries to enforce that Hub URLs are put at the end of the topic, separated with a pipe
 // from any other content.
-class TopicManager {
+export class TopicManager {
 
   constructor(hostnames) {
     this.hubUrlRe = TopicManager.buildHubUrlRegex(hostnames);
@@ -102,5 +102,3 @@ class TopicManager {
   }
 
 }
-
-module.exports = { TopicManager };

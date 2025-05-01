@@ -1,5 +1,5 @@
 // Represents our knowledge about a hub on a particular Reticulum server.
-class HubState {
+export class HubState {
 
   constructor(reticulumCh, host, id, name, slug, ts, stats, presenceRollups) {
     this.reticulumCh = reticulumCh;
@@ -23,7 +23,7 @@ class HubState {
 }
 
 // Represents the current mapping between Discord channels and Hubs rooms for bridging purposes.
-class Bridges {
+export class Bridges {
 
   constructor() {
     this.hubsByChannel = {}; // {discord channel ID: hub state}
@@ -66,5 +66,3 @@ class Bridges {
   }
 
 }
-
-module.exports = { Bridges, HubState };
