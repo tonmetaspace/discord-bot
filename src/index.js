@@ -33,7 +33,7 @@ function logger(kind, msg, data) {
 
 const HOSTNAMES = process.env.HUBS_HOSTS.split(",");
 const MEDIA_DEDUPLICATE_MS = 60 * 60 * 1000; // 1 hour
-const IMAGE_URL_RE = /\.(png)|(gif)|(jpg)|(jpeg)$/;
+const IMAGE_URL_RE = /\.(png)|(gif)|(jpg)|(jpeg)$/i;
 const ACTIVE_ICON = "🔸";
 const ACTIVE_WEBHOOKS = {}; // { discordChId: webhook }
 
