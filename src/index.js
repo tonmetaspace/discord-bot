@@ -910,10 +910,10 @@ async function start() {
       case "kill": {
         // todo: probably make this configurable
         const WHITELISTED_USERS = [
-          "339914448032497664", // gfodor
-          "544406895889350676", // elgin
-          "407386567305330688", // liv
-          "146595594155196416" // mqp
+          //"339914448032497664", // gfodor
+          //"544406895889350676", // elgin
+          //"407386567305330688", // liv
+          //"146595594155196416" // mqp
         ];
         if (!WHITELISTED_USERS.includes(msg.author.id)) {
           return discordCh.send("You are not powerful enough to kill the bot.");
