@@ -858,7 +858,15 @@ async function start() {
       case "users": {
         // "!hubs users" == list users
         if (hubState != null) {
-          const names = Object.values(hubState.reticulumCh.getUsers()).map(info => info.metas[0].profile.displayName);
+          const names = Object.values(hubState.reticulumCh.getUsers()).map(
+            info => {
+              let profile = info.metas[0].profile;
+              let name = profile.displayName;
+              if (profile.identityName) {
+                name = `${name} (${profile.identityName})`
+              }
+              return name
+            });
           if (names.length) {
             return discordCh.send(`Users currently in <${hubState.url}>: **${names.join(", ")}**`);
           } else {
