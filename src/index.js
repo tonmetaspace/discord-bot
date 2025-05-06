@@ -907,20 +907,17 @@ async function start() {
         }
       }
 
-      case "kill": {
-        // todo: probably make this configurable
-        const WHITELISTED_USERS = [
-          //"339914448032497664", // gfodor
-          //"544406895889350676", // elgin
-          //"407386567305330688", // liv
-          //"146595594155196416" // mqp
-        ];
-        if (!WHITELISTED_USERS.includes(msg.author.id)) {
-          return discordCh.send("You are not powerful enough to kill the bot.");
-        }
-        await discordCh.send("Goodbye, cruel world!");
-        process.exit(0);
-      }
+      // It is unclear whether this command still makes sense or how permissions for using it should be handled, so the whitelisted user ids have been removed and it has been commented out for now.
+      // case "kill": {
+      //   // todo: probably make this configurable
+      //   const WHITELISTED_USERS = [
+      //   ];
+      //   if (!WHITELISTED_USERS.includes(msg.author.id)) {
+      //     return discordCh.send("You are not powerful enough to kill the bot.");
+      //   }
+      //   await discordCh.send("Goodbye, cruel world!");
+      //   process.exit(0);
+      // }
 
       }
 
