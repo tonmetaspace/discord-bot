@@ -764,7 +764,7 @@ async function start() {
           return;
         }
 
-        let author_name = msg.guild.members.cache.get(msg.author.id).nickname;
+        let author_name = msg.guild?.members?.cache?.get(msg.author.id)?.nickname;
         if (!author_name) {
           author_name = msg.author.globalName;
         }
@@ -860,10 +860,10 @@ async function start() {
         if (hubState != null) {
           const names = Object.values(hubState.reticulumCh.getUsers()).map(
             info => {
-              let profile = info.metas[0].profile;
-              let name = profile.displayName;
-              if (profile.identityName) {
-                name = `${name} (${profile.identityName})`
+              let profile = info.metas[0]?.profile;
+              let name = profile?.displayName;
+              if (profile?.identityName) {
+                name = `${name} (${profile?.identityName})`
               }
               return name
             });
