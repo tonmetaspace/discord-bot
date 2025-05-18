@@ -107,32 +107,35 @@ To simply run the bot process:
 
 2. Install Node v22.14.0 and the corresponding version of `npm`. The instructions [at the NPM website][npm] should suffice.
 
-3. Install Javascript dependencies by running `npm ci`.
+3. Install [Python 3][python] (whatever the latest release is should be fine).
 
-4. [Create a Discord bot on the Discord website.][discord-docs]
+4. Install Javascript dependencies by running `npm ci`.
 
-5. Add redirect URI in the OAuth page and select the bot permissions.
+5. [Create a Discord bot on the Discord website.][discord-docs]
+
+6. Add redirect URI in the OAuth page and select the bot permissions.
    - Redirect URI: `https://hubs.local:4000/api/v1/oauth/discord`
 
-6. Make sure "REQUIRES OAUTH2 CODE GRANT" is disabled in the Bot page.
+7. Make sure "REQUIRES OAUTH2 CODE GRANT" is disabled in the Bot page.
 
-7. Enable the "MESSAGE CONTENT INTENT" in the Privileged Gateway Intents section of the Bot page.
+8. Enable the "MESSAGE CONTENT INTENT" in the Privileged Gateway Intents section of the Bot page.
 
-8. Create an `.env` file with your bot's API token. Include `RETICULUM_HOST={your server}` and `HUBS_HOSTS={your server}` to point it at your local backend. `RETICULUM_HOST={your server}` should point to 'hubs.local:4000' (or the domain name of your Hubs instance, e.g. example.org). You can see the different configuration bits you can override in [`.env.defaults`](./.env.defaults). You can also pass these values as environment variables when you run `npm start`/`npm run local`.
+9. Create an `.env` file with your bot's API token. Include `RETICULUM_HOST={your server}` and `HUBS_HOSTS={your server}` to point it at your local backend. `RETICULUM_HOST={your server}` should point to 'hubs.local:4000' (or the domain name of your Hubs instance, e.g. example.org). You can see the different configuration bits you can override in [`.env.defaults`](./.env.defaults). You can also pass these values as environment variables when you run `npm start`/`npm run local`.
 
-9. Create a random alphanumeric string and set the RETICULUM_BOT_ACCESS_KEY in `.env` to it.
+10. Create a random alphanumeric string and set the RETICULUM_BOT_ACCESS_KEY in `.env` to it.
 
-10. Inside your local reticulum instance in reticulum/config/dev.exs change the configuration for `Ret.DiscordClient` to point to your bot's: `client_id` (Discord Devloper Portal, OAuth page), `client_secret` (Discord Devloper Portal, OAuth page), and `bot_token` (Discord Devloper Portal, Bot page) found inside your Discord bot, then change bot_access_key to the value of RETICULUM_BOT_ACCESS_KEY that you set in `.env`.  Add `cdn.discordapp.com` to the img_src cors policy in order to allow Discord images to be rendered in the Hubs chat.  If you're using a Community Edition instance, these fields can be found in `hcce.yaml` (you will need to redeploy your instance with the new values).
+11. Inside your local reticulum instance in reticulum/config/dev.exs change the configuration for `Ret.DiscordClient` to point to your bot's: `client_id` (Discord Devloper Portal, OAuth page), `client_secret` (Discord Devloper Portal, OAuth page), and `bot_token` (Discord Devloper Portal, Bot page) found inside your Discord bot, then change bot_access_key to the value of RETICULUM_BOT_ACCESS_KEY that you set in `.env`.  Add `cdn.discordapp.com` to the img_src cors policy in order to allow Discord images to be rendered in the Hubs chat.  If you're using a Community Edition instance, these fields can be found in `hcce.yaml` (you will need to redeploy your instance with the new values).
 
-11. Run `npm run local` or `npm run start` (for Community Edition instances) to start the server, connect to Discord and Reticulum, and operate indefinitely.
+12. Run `npm run local` or `npm run start` (for Community Edition instances) to start the server, connect to Discord and Reticulum, and operate indefinitely.
 
-12. Set the Scope for the OAuth 2 URL Generator to "bot" in the OAuth page of the Discord Devloper Portal and then select the permissions you want the bot to globally have (if you navigate away from this page and then return you will need to redo this step)
+13. Set the Scope for the OAuth 2 URL Generator to "bot" in the OAuth page of the Discord Devloper Portal and then select the permissions you want the bot to globally have (if you navigate away from this page and then return you will need to redo this step)
 
-13. Copy the URL from the bottom of the OAuth page of your Discord bot after everything is set up and you have set your desired permissions and paste it into a new tab to add the bot to your server.
+14. Copy the URL from the bottom of the OAuth page of your Discord bot after everything is set up and you have set your desired permissions and paste it into a new tab to add the bot to your server.
 
-14. [Follow the instructions above](#usage) to set up and use the bot on your Discord guild/server.
+15. [Follow the instructions above](#usage) to set up and use the bot on your Discord guild/server.
 
 [npm]: https://nodejs.org/en/
+[python]: https://www.python.org/downloads/
 [discord-docs]: https://discordapp.com/developers/docs/intro
 [invite-page]: https://your-server.com/discord
 [hubs-discord]: https://discord.gg/wHmY4nd
