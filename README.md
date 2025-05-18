@@ -95,6 +95,7 @@ To simply run the bot process:
 2. Install Node v22.14.0 and the corresponding version of `npm`. The instructions [at the NPM website][npm] should suffice.
 
 3. Install Javascript dependencies by running `npm ci`.
+   - Note: check the comment section of package.json when updating dependencies.
 
 4. [Create a Discord bot on the Discord website.][discord-docs]
 
