@@ -39,10 +39,10 @@
   "//": {
     "dependencies comments": {
       "bufferutil comment": [
-        "An optional dependency for both @discordjs/ws and ws that's used to increase performance."
+        "An optional dependency for both @discordjs/ws and ws that's used as a regular dependency here to increase performance."
       ],
       "zlib-sync comment": [
-        "An optional dependency for @discordjs/ws that's used to increase performance."
+        "An optional dependency for @discordjs/ws that's used as a regular dependency here to increase performance."
       ]
     }
   }
