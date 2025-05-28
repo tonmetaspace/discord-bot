@@ -125,6 +125,7 @@ To simply run the bot process:
 10. Create a random alphanumeric string and set the RETICULUM_BOT_ACCESS_KEY in `.env` to it.
 
 11. Inside your local reticulum instance in reticulum/config/dev.exs change the configuration for `Ret.DiscordClient` to point to your bot's: `client_id` (Discord Devloper Portal, OAuth page), `client_secret` (Discord Devloper Portal, OAuth page), and `bot_token` (Discord Devloper Portal, Bot page) found inside your Discord bot, then change bot_access_key to the value of RETICULUM_BOT_ACCESS_KEY that you set in `.env`.  Add `cdn.discordapp.com` to the img_src cors policy in order to allow Discord images to be rendered in the Hubs chat.  If you're using a Community Edition instance, these fields can be found in `hcce.yaml` (you will need to redeploy your instance with the new values).
+   - Note: this is only required for accessing/creating Discord bound rooms and isn't required if you're just bridging to non Discord bound rooms.
 
 12. Run `npm run local` or `npm run start` (for Community Edition instances) to start the server, connect to Discord and Reticulum, and operate indefinitely.
 
