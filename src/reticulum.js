@@ -52,7 +52,11 @@ export class ReticulumChannel extends EventEmitter {
       }
 
       // this user was not previously present, notify for a join
-      this.emit('join', Date.now(), id, mostRecent.presence, mostRecent.profile.displayName);
+      let name = mostRecent.profile.displayName;
+      if (mostRecent.profile.identityName) {
+        name = `${name} (${mostRecent.profile.identityName})`;
+      }
+      this.emit('join', Date.now(), id, mostRecent.presence, name);
     });
 
     this.presence.onLeave((id, curr, p) => {
@@ -66,7 +70,11 @@ export class ReticulumChannel extends EventEmitter {
         return; // this user is still in the lobby or room, don't notify yet
       }
 
-      this.emit('leave', Date.now(), id, mostRecent.presence, mostRecent.profile.displayName);
+      let name = mostRecent.profile.displayName;
+      if (mostRecent.profile.identityName) {
+        name = `${name} (${mostRecent.profile.identityName})`;
+      }
+      this.emit('leave', Date.now(), id, mostRecent.presence, name);
     });
 
     this.presence.onSync(() => { this.emit('sync', Date.now()); });

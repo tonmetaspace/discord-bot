@@ -763,11 +763,20 @@ async function start() {
         if (hubState == null) {
           return;
         }
+
+        let author_name = msg.guild?.members?.cache?.get(msg.author.id)?.nickname;
+        if (!author_name) {
+          author_name = msg.author.globalName;
+        }
+        if (!author_name) {
+          author_name = msg.author.username;
+        }
+
         if (msg.cleanContent) { // could be blank if the message is e.g. only an attachment
           if (VERBOSE) {
             console.debug(ts(`Relaying chat message via ${formatDiscordCh(discordCh)} to hub ${hubState.id}.`));
           }
-          hubState.reticulumCh.sendMessage(msg.author.username, "chat", msg.cleanContent);
+          hubState.reticulumCh.sendMessage(author_name, "chat", msg.cleanContent);
         }
 
         // todo: we don't currently have any principled way of representing non-image attachments in hubs --
@@ -779,7 +788,7 @@ async function start() {
           if (VERBOSE) {
             console.debug(ts(`Relaying attachment via ${formatDiscordCh(discordCh)} to hub ${hubState.id}.`));
           }
-          hubState.reticulumCh.sendMessage(msg.author.username, "image", { "src": attachment.url });
+          hubState.reticulumCh.sendMessage(author_name, "image", { "src": attachment.url });
         }
         return;
       }
@@ -849,7 +858,15 @@ async function start() {
       case "users": {
         // "!hubs users" == list users
         if (hubState != null) {
-          const names = Object.values(hubState.reticulumCh.getUsers()).map(info => info.metas[0].profile.displayName);
+          const names = Object.values(hubState.reticulumCh.getUsers()).map(
+            info => {
+              let profile = info.metas[0]?.profile;
+              let name = profile?.displayName;
+              if (profile?.identityName) {
+                name = `${name} (${profile?.identityName})`
+              }
+              return name
+            });
           if (names.length) {
             return discordCh.send(`Users currently in <${hubState.url}>: **${names.join(", ")}**`);
           } else {
