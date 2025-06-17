@@ -24,17 +24,26 @@
     "bufferutil": "^4.0.9",
     "discord.js": "^14.18.0",
     "dotenv": "^16.5.0",
-    "erlpack": "github:hammerandchisel/erlpack",
     "escape-string-regexp": "^5.0.0",
     "moment-timezone": "^0.5.48",
     "node-schedule": "^2.1.1",
     "phoenix": "^1.7.21",
     "ws": "^8.18.1",
-    "zucc": "^0.1.2"
+    "zlib-sync": "^0.1.10"
   },
   "devDependencies": {
     "eslint": "^9.24.0",
     "eslint-plugin-node": "^11.1.0",
     "tape": "^5.9.0"
+  },
+  "//": {
+    "dependencies comments": {
+      "bufferutil comment": [
+        "An optional dependency for both @discordjs/ws and ws that's used as a regular dependency here to increase performance."
+      ],
+      "zlib-sync comment": [
+        "An optional dependency for @discordjs/ws that's used as a regular dependency here to increase performance."
+      ]
+    }
   }
 }

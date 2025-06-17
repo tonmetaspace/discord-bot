@@ -4,7 +4,7 @@ dotenv_config({ path: ".env" });
 dotenv_config({ path: ".env.defaults" });
 
 if (process.env.SENTRY_DSN) {
-  const Sentry = import("@sentry/node");
+  const Sentry = await import("@sentry/node");
   Sentry.init({ dsn: process.env.SENTRY_DSN });
 }
 
