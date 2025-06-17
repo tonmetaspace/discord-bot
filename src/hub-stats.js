@@ -3,7 +3,7 @@
 // When beginning to accumulate statistics for a hub, you can call `arrive` with the current
 // timestamp for any existing users, and those users' preexisting presence will be correctly
 // accounted for in the summary statistics later.
-class HubStats {
+export class HubStats {
 
   constructor() {
     this.ccu = 0;
@@ -65,5 +65,3 @@ class HubStats {
     return { arrivals, departures, peakCcu, peakTime };
   }
 }
-
-module.exports = { HubStats };

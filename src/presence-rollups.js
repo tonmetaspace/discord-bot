@@ -1,4 +1,4 @@
-const EventEmitter = require('events');
+import EventEmitter from 'node:events';
 
 // Data structure for tracking the series of arrivals/departures in a hub and rolling it up
 // into a useful stream of notifications. When new arrivals or departures happen, either
@@ -12,7 +12,7 @@ const EventEmitter = require('events');
 // - "update", indicating that the previous notification should be amended and whichever users
 //   were announced in it should be replaced with the newly provided set of users.
 //
-class PresenceRollups extends EventEmitter {
+export class PresenceRollups extends EventEmitter {
 
   // note that there is one highly suspicious thing about this implementation; we don't have a consistent
   // way of tracking that a client who leaves and rejoins is "the same guy", so instead, we assume that people
@@ -127,5 +127,3 @@ class PresenceRollups extends EventEmitter {
   }
 
 }
-
-module.exports = { PresenceRollups };

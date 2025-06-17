@@ -1,5 +1,5 @@
-var test = require('tape');
-var { PresenceRollups } = require('../src/presence-rollups.js');
+import test from 'tape';
+import { PresenceRollups } from "../src/presence-rollups.js";
 
 test('PresenceRollups rolls up arrivals and departures correctly', function(t) {
   var q = new PresenceRollups({

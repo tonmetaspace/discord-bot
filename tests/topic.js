@@ -1,5 +1,5 @@
-var test = require('tape');
-var { TopicManager } = require('../src/topic.js');
+import test from 'tape';
+import { TopicManager } from "../src/topic.js";
 
 test('Hubs URLs are correctly added to and removed from topics', function(t) {
   var tm = new TopicManager(["hubsfoundation.org"]);
